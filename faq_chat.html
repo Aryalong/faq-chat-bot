@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bot Chat</title>
+</head>
+<body>
+  <div>FAQ チャットを起動しています...</div>
+
+  <script>
+    // 从 URL 中读取记录 ID
+    const urlParams = new URLSearchParams(window.location.search);
+    const incidentId = urlParams.get('id');
+
+    // 设置为 Bot 的 customData
+    window.Microsoft = window.Microsoft || {};
+    window.Microsoft.BotChat = {
+      customData: {
+        incidentId: incidentId
+      }
+    };
+  </script>
+
+  <script
+     id="Microsoft_Omnichannel_LCWidget"
+  src="https://oc-cdn-public-jpn.azureedge.net/livechatwidget/scripts/LiveChatBootstrapper.js"
+  data-app-id="6739d785-3755-4e13-b259-5c459fd77223"
+  data-lcw-version="prod"
+  data-org-id="6e457c7f-fe0d-f011-9aee-000d3a4169bc"
+  data-org-url="https://m-6e457c7f-fe0d-f011-9aee-000d3a4169bc.jp.omnichannelengagementhub.com">
+  </script>
+
+  <script>
+    // Bot 加载完成后自动弹出聊天框
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        if (window.Microsoft.Omnichannel?.LiveChatWidget?.startChat) {
+          window.Microsoft.Omnichannel.LiveChatWidget.startChat();
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>
